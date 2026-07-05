@@ -3,7 +3,6 @@ import {
     SelectContent,
     SelectGroup,
     SelectItem,
-    SelectLabel,
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
@@ -11,7 +10,6 @@ import type { NodeKind, NodeMetadata } from "./CreateWorkFlow";
 import { Button } from "@/components/ui/button"
 import {
     Sheet,
-    SheetClose,
     SheetContent,
     SheetDescription,
     SheetFooter,
@@ -38,9 +36,10 @@ export const TriggerSheet = ({
 }) => {
 
     const [metadata, setMetadata] = useState({});
+    const [selectedTrigger, setSelectedTrigger] = useState(SUPPORTED_TRIGGERS[0].id);
 
-    return <Sheet>
-            <SheetTrigger asChild>
+    return <Sheet open={true}>
+            <SheetTrigger>
                 <Button variant="outline" className="capitalize">
                 </Button>
             </SheetTrigger>
@@ -50,18 +49,15 @@ export const TriggerSheet = ({
                 <SheetHeader>
                     <SheetTitle>Select Trigger</SheetTitle>
                     <SheetDescription>
-                        <Select>
-                            <SelectTrigger className="w-full max-w-48">
+                        Select the type of trigger that you need
+                        <Select value={selectedTrigger} onValueChange={(value) => setSelectedTrigger(value)}>
+                            <SelectTrigger className="w-full">
                                 <SelectValue placeholder="Select a fruit" />
                             </SelectTrigger>
                             <SelectContent>
                                 <SelectGroup>
                                     {SUPPORTED_TRIGGERS.map(({ id, title }) => <>
-                                        <SelectLabel>{title}</SelectLabel>
-                                        <SelectItem onSelect={() => onSelect(
-                                            kind,
-                                            metadata 
-                                        )} value={id}>{title}</SelectItem>
+                                        <SelectItem key={id} value={id}>{title}</SelectItem>
                                     </>)}
                                 </SelectGroup>
                             </SelectContent>
@@ -70,10 +66,11 @@ export const TriggerSheet = ({
                 </SheetHeader>
                 
                 <SheetFooter>
-                <Button type="submit">Save changes</Button>
-                <SheetClose asChild>
-                    <Button variant="outline">Cancel</Button>
-                </SheetClose>
+                    <Button onClick={() => 
+                                onSelect(
+                                    selectedTrigger,
+                                    metadata 
+                                )} type="submit">Save Trigger</Button>
                 </SheetFooter>
             </SheetContent>
         </Sheet>
