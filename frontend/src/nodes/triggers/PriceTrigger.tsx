@@ -1,6 +1,6 @@
 import { Handle, Position } from "@xyflow/react";
 
-type PriceTriggerMetadata = {
+export type PriceTriggerMetadata = {
     asset: string,
     price: number
 }
