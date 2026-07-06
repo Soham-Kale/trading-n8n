@@ -4,11 +4,11 @@ export type TimerNodeMetadata = {
     time: number,
 }
 
-export function Timer({ data, isConnactable }: {
+export function Timer({ data }: {
     data: {
         metadata: TimerNodeMetadata
     },
-    isConnactable: boolean
+    isConnectable?: boolean
 }) {
     return (
         <div>

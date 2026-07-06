@@ -39,7 +39,6 @@ export const TriggerSheet = ({
 } : {
     onSelect: (kind: NodeKind, metatdata: NodeMetadata) => void,
 }) => {
-
     const [metadata, setMetadata] = useState<PriceTriggerMetadata | TimerNodeMetadata>({
         time: 3600,
     });

@@ -5,11 +5,11 @@ export type PriceTriggerMetadata = {
     price: number
 }
 
-export function PriceTrigger({ data, isConnactable }: {
+export function PriceTrigger({ data }: {
     data: {
         metadata: PriceTriggerMetadata
     },
-    isConnactable: boolean
+    isConnectable?: boolean
 }) {
     return (
         <div>
