@@ -46,8 +46,6 @@ export default function CreateWorkFlow() {
     
     return (
         <div style={{ width: '100vw', height: '100vh' }}>
-
-            {JSON.stringify(nodes)}
             {!nodes.length && <TriggerSheet onSelect={(type, metadata) => 
                 setNodes([...nodes, {
                     id: Math.random().toString(),

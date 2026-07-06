@@ -12,9 +12,13 @@ export function PriceTrigger({ data }: {
     isConnectable?: boolean
 }) {
     return (
-        <div>
-            {data.metadata.asset}
-            {data.metadata.price}
+        <div className="rounded-md border bg-background px-4 py-2 shadow-sm">
+            <div>
+                {data.metadata.asset}
+            </div>
+            <div>
+                {data.metadata.price}
+            </div>
             <Handle type="source" position={Position.Right}></Handle>
         </div>
     )

@@ -85,6 +85,7 @@ export const TriggerSheet = ({
                                     ...m,
                                     price: Number(e.target.value)
                                 }))}></Input>
+                                Asset:
                                 <Select value={metadata.asset} onValueChange={(value) => setMetadata(metadata => ({
                                     ...metadata,
                                     asset: value,
@@ -105,11 +106,15 @@ export const TriggerSheet = ({
                 </SheetHeader>
                 
                 <SheetFooter>
-                    <Button onClick={() => 
-                                onSelect(
-                                    selectedTrigger,
-                                    metadata 
-                                )} type="submit">Save Trigger</Button>
+                    <Button 
+                        onClick={() => 
+                            onSelect(
+                                selectedTrigger,
+                                metadata 
+                            )} 
+                        type="submit">
+                            Save Trigger
+                    </Button>
                 </SheetFooter>
             </SheetContent>
         </Sheet>
