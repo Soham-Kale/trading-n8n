@@ -56,10 +56,10 @@ export const ActionSheet = ({
                 <SheetHeader>
                     <SheetTitle>Select Action</SheetTitle>
                     <SheetDescription>
-                        Select the type of trigger that you need
+                        Select the type of action that you need
                         <Select value={selectedActions} onValueChange={(value) => setSelectedActions(value)}>
                             <SelectTrigger className="w-full">
-                                <SelectValue placeholder="Select a trigger" />
+                                <SelectValue placeholder="Select a action"/>
                             </SelectTrigger>
                             <SelectContent>
                                 <SelectGroup>
@@ -101,8 +101,9 @@ export const ActionSheet = ({
                                     </SelectTrigger>
                                     <SelectContent>
                                         <SelectGroup>
-                                            <SelectItem value={"logn"}>LONG</SelectItem>
-                                            <SelectItem value={"short"}>SHORT</SelectItem>
+                                            {SUPPORTED_ASSETS.map(asset => <SelectItem key={asset} value={asset}>
+                                                {asset}
+                                            </SelectItem>)}
                                         </SelectGroup> 
                                     </SelectContent>
                                 </Select>
@@ -111,32 +112,16 @@ export const ActionSheet = ({
                                 </div>
                                 <Input value={metadata?.qty} onChange={(e) => setMetadata(metadata => ({
                                     ...metadata,
-                                    time: Number(e.target.value),
+                                    qty: Number(e.target.value),
                                 }))}></Input>
                             </div>}
 
                             {selectedActions === "price-trigger" && <div className="pt-4">
-                                Qty: 
+                                Price:
                                 <Input type="text" onChange={(e) => setMetadata(m => ({
                                     ...m,
-                                    price: Number(e.target.value)
-                                }))}></Input>
-                                Price:
-                                <Select value={metadata.asset} onValueChange={(value) => setMetadata(metadata => ({
-                                    ...metadata,
-                                    asset: value,
-                                }))}>
-                                    <SelectTrigger className="w-full">
-                                        <SelectValue placeholder="Select an asset" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectGroup>
-                                            {SUPPORTED_ASSETS.map((id ) => <>
-                                                <SelectItem key={id} value={id}>{id}</SelectItem>
-                                            </>)}
-                                        </SelectGroup>
-                                    </SelectContent>
-                                </Select>
+                                    price: Number(e.target.value),
+                                }))}></Input>                                
                             </div>}
                     </SheetDescription>
                 </SheetHeader>
@@ -149,7 +134,7 @@ export const ActionSheet = ({
                                 metadata 
                             )} 
                         type="submit">
-                            Save Trigger
+                            Save Actions
                     </Button>
                 </SheetFooter>
             </SheetContent>

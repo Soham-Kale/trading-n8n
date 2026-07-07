@@ -1,8 +1,10 @@
 import { useState, useCallback } from 'react';
 import { ReactFlow, applyNodeChanges, applyEdgeChanges, addEdge } from '@xyflow/react';
 import { TriggerSheet } from './TriggerSheet';
-import { PriceTrigger } from '@/nodes/triggers/PriceTrigger';
-import { Timer } from '@/nodes/triggers/Timer';
+import { PriceTrigger, type PriceTriggerMetadata } from '@/nodes/triggers/PriceTrigger';
+import { Timer, type TimerNodeMetadata } from '@/nodes/triggers/Timer';
+import type { TradingMetadata } from '@/nodes/actions/Lighter';
+import { ActionSheet } from './ActionSheet';
 
 const nodeType = {
     "price-trigger": PriceTrigger,
@@ -10,7 +12,7 @@ const nodeType = {
 }
 
 export type NodeKind = "price-trigger" | "timer" | "hyperliquid" | "backpack" | "lighter"
-export type NodeMetadata = any;
+export type NodeMetadata = TimerNodeMetadata | PriceTriggerMetadata | TradingMetadata;
 
 interface NodeType {
     type: NodeKind,
@@ -30,6 +32,13 @@ interface Edge {
 export default function CreateWorkFlow() {
     const [nodes, setNodes] = useState<NodeType[]>([]);
     const [edges, setEdges] = useState<Edge[]>([]);
+    const [selectAction, setSelectAction] = useState<{
+        position: {
+            x: number,
+            y: number
+        },
+        startingNodeId: string 
+    } | null>(null);
     
     const onNodesChange = useCallback(
         (changes: any) => setNodes((nodesSnapshot) => applyNodeChanges(changes, nodesSnapshot)),
@@ -46,7 +55,14 @@ export default function CreateWorkFlow() {
 
     const onConnectEnd = useCallback(
         (params, connectionInfo) => {
-            console.log(connectionInfo)
+            if(!connectionInfo.valid) {
+                setSelectAction({
+                    startingNodeId: connectionInfo.fromNode.id,
+                    position: connectionInfo.from,
+                })
+                console.log(connectionInfo.fromNode.id);
+                console.log(connectionInfo.fromNode.to);
+            }
         },
         []
     )
@@ -63,6 +79,26 @@ export default function CreateWorkFlow() {
                     },
                     position: { x: 0, y: 0},
                 }])
+            }/>}
+
+            {selectAction && <ActionSheet onSelect={(type, metadata) => {
+                const nodeId = Math.random().toString();
+                setNodes([...nodes, {
+                    id: nodeId,
+                    type,
+                    data: {
+                        kind: "action",
+                        metadata,
+                    },
+                    position: selectAction.position,
+                }]);
+                setEdges([...edges, {
+                    id: `${selectAction.startingNodeId} - ${nodeId}` ,
+                    source: selectAction.startingNodeId,
+                    target: nodeId,
+                }]);
+                setSelectAction(null);
+            }
             }/>}
 
             <ReactFlow
