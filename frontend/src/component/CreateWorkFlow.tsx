@@ -43,6 +43,13 @@ export default function CreateWorkFlow() {
         (params: any) => setEdges((edgesSnapshot) => addEdge(params, edgesSnapshot)),
         [],
     );
+
+    const onConnectEnd = useCallback(
+        (params, connectionInfo) => {
+            console.log(connectionInfo)
+        },
+        []
+    )
     
     return (
         <div style={{ width: '100vw', height: '100vh' }}>
@@ -65,6 +72,7 @@ export default function CreateWorkFlow() {
                 onNodesChange={onNodesChange}
                 onEdgesChange={onEdgesChange}
                 onConnect={onConnect}
+                onConnectEnd={onConnectEnd}
                 fitView
             />
         </div>

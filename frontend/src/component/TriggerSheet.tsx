@@ -22,7 +22,7 @@ import type { PriceTriggerMetadata } from "@/nodes/triggers/PriceTrigger";
 import type { TimerNodeMetadata } from "@/nodes/triggers/Timer";
 import { Input } from "@/components/ui/input";
 
-const SUPPORTED_TRIGGERS = [{
+const SUPPORTED_ACTIONS = [{
     id: "timer",
     title: "Timer",
     Description: "Run this trigger every x seconds/minutes"
