@@ -3,12 +3,17 @@ import { ReactFlow, applyNodeChanges, applyEdgeChanges, addEdge } from '@xyflow/
 import { TriggerSheet } from './TriggerSheet';
 import { PriceTrigger, type PriceTriggerMetadata } from '@/nodes/triggers/PriceTrigger';
 import { Timer, type TimerNodeMetadata } from '@/nodes/triggers/Timer';
-import type { TradingMetadata } from '@/nodes/actions/Lighter';
+import { Lighter, type TradingMetadata } from '@/nodes/actions/Lighter';
 import { ActionSheet } from './ActionSheet';
+import { Backpack } from '@/nodes/actions/Backpack';
+import { Hyperliquid } from '@/nodes/actions/Hyperliquid';
 
 const nodeType = {
     "price-trigger": PriceTrigger,
     "timer": Timer,
+    "lighter": Lighter,
+    "backpack": Backpack,
+    "hyperliquid": Hyperliquid
 }
 
 export type NodeKind = "price-trigger" | "timer" | "hyperliquid" | "backpack" | "lighter"

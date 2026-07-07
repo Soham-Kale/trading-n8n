@@ -70,7 +70,7 @@ export const ActionSheet = ({
                             </SelectContent>
                             </Select>
 
-                            {selectedActions === "hyperliquid" || selectedActions === "lighter" || selectedActions === "backpack" && <div>
+                            {(selectedActions === "hyperliquid" || selectedActions === "lighter" || selectedActions === "backpack") && <div>
                                 <div className="pt-4">
                                     Type
                                 </div>
