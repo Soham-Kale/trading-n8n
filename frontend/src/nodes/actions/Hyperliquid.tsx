@@ -13,7 +13,7 @@ export function Hyperliquid({ data }: {
             <div>{data.metadata.qty}</div>
             <div>{data.metadata.symbol}</div>
             <Handle type="source" position={Position.Right}></Handle>
-            <Handle type="source" position={Position.Left}></Handle>
+            <Handle type="target" position={Position.Left}></Handle>
         </div>
     )
 }

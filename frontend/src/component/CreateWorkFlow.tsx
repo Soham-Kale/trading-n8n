@@ -58,15 +58,18 @@ export default function CreateWorkFlow() {
         [],
     );
 
+    const POSITION_OFFSET = 1;
+
     const onConnectEnd = useCallback(
         (params, connectionInfo) => {
             if(!connectionInfo.valid) {
                 setSelectAction({
                     startingNodeId: connectionInfo.fromNode.id,
-                    position: connectionInfo.from,
+                    position: {
+                        x: connectionInfo.from.x + POSITION_OFFSET,
+                        y: connectionInfo.from.y + POSITION_OFFSET
+                    }
                 })
-                console.log(connectionInfo.fromNode.id);
-                console.log(connectionInfo.fromNode.to);
             }
         },
         []
