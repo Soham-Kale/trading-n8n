@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { ReactFlow, applyNodeChanges, applyEdgeChanges, addEdge } from '@xyflow/react';
+import { ReactFlow, Background, Controls, applyNodeChanges, applyEdgeChanges, addEdge } from '@xyflow/react';
 import { TriggerSheet } from './TriggerSheet';
 import { PriceTrigger, type PriceTriggerMetadata } from '@/nodes/triggers/PriceTrigger';
 import { Timer, type TimerNodeMetadata } from '@/nodes/triggers/Timer';
@@ -58,7 +58,7 @@ export default function CreateWorkFlow() {
         [],
     );
 
-    const POSITION_OFFSET = 1;
+    const POSITION_OFFSET = 10;
 
     const onConnectEnd = useCallback(
         (params, connectionInfo) => {
@@ -76,8 +76,8 @@ export default function CreateWorkFlow() {
     )
     
     return (
-        <div style={{ width: '100vw', height: '100vh' }}>
-            {!nodes.length && <TriggerSheet onSelect={(type, metadata) => 
+        <div className="w-screen h-screen bg-muted/30">
+            {!nodes.length && <TriggerSheet onSelect={(type, metadata) =>
                 setNodes([...nodes, {
                     id: Math.random().toString(),
                     type,
@@ -118,7 +118,10 @@ export default function CreateWorkFlow() {
                 onConnect={onConnect}
                 onConnectEnd={onConnectEnd}
                 fitView
-            />
+            >
+                <Background />
+                <Controls />
+            </ReactFlow>
         </div>
     );
 }

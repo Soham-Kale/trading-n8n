@@ -7,13 +7,22 @@ export function Hyperliquid({ data }: {
     }
 }) {
     return (
-        <div className="p-4 border">
-            Hyperliquid Trade
-            <div>{data.metadata.type}</div>
-            <div>{data.metadata.qty}</div>
-            <div>{data.metadata.symbol}</div>
-            <Handle type="source" position={Position.Right}></Handle>
-            <Handle type="target" position={Position.Left}></Handle>
+        <div className="min-w-40 rounded-lg border border-l-4 border-l-chart-4 bg-card px-4 py-3 shadow-sm">
+            <div className="text-sm font-semibold">Hyperliquid Trade</div>
+            <div className="mt-1.5 flex items-center justify-between gap-4">
+                <span className="text-xs text-muted-foreground">Type</span>
+                <span className="text-sm font-medium">{data.metadata.type}</span>
+            </div>
+            <div className="flex items-center justify-between gap-4">
+                <span className="text-xs text-muted-foreground">Symbol</span>
+                <span className="text-sm font-medium">{data.metadata.symbol}</span>
+            </div>
+            <div className="flex items-center justify-between gap-4">
+                <span className="text-xs text-muted-foreground">Qty</span>
+                <span className="text-sm font-medium">{data.metadata.qty}</span>
+            </div>
+            <Handle type="source" position={Position.Right} className="size-2.5! bg-chart-4! border-background!"></Handle>
+            <Handle type="target" position={Position.Left} className="size-2.5! bg-chart-4! border-background!"></Handle>
         </div>
     )
 }
